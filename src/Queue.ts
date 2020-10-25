@@ -86,7 +86,7 @@ export class Queue {
         this.activeJobCount = 0;
 
         this.updateInterval = 10;
-        this.onQueueFinish = (executedJobs: Array<Job<any>>) => {};
+        this.onQueueFinish = (executedJobs: Array<Job<any>>) => { };
         this.concurrency = -1;
     }
     /**
@@ -98,13 +98,16 @@ export class Queue {
 
     configure(options: QueueOptions) {
         const {
-            onQueueFinish = (executedJobs: Array<Job<any>>) => {},
+            onQueueFinish = (executedJobs: Array<Job<any>>) => { },
             updateInterval = 10,
             concurrency = -1
         } = options;
         this.onQueueFinish = onQueueFinish;
         this.updateInterval = updateInterval;
         this.concurrency = concurrency;
+    }
+    getWorkers() {
+        return this.workers;
     }
     /**
      * adds a [[Worker]] to the queue which can execute Jobs
